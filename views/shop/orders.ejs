@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<%- include('../includes/head.ejs' )   %>
+		
+	</head>
+
+	<body>
+		<%- include('../includes/nav.ejs' )   %>
+          <main>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1>Orders</h1>
+						<% if (orders.length > 0) { %>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Product</th>
+										<th>Price</th>
+										<th>Quantity</th>
+										<th>Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% orders.forEach((order) => { %>
+										<% order.products.forEach((p) => { %>
+											<tr>
+												<td><%= p.title %></td>
+												<td>$<%= p.price %></td>
+												<td><%= p.orderItems.quantity %></td>
+												<td>$<%= p.price * p.orderItems.quantity %></td>
+											</tr>
+										<% }) %>
+									<% }) %>
+								</tbody>
+							</table>
+						<% } else { %>
+							<h3>No orders yet</h3>
+						<% } %>
+					</div>
+				</div>
+			<h1>
+				Nothing here yet..!
+			</h1>
+		  </main>
+		<%- include('../includes/end.ejs' )   %>

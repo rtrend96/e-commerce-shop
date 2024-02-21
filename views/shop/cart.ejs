@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<%- include('../includes/head.ejs' )   %>
+		
+	</head>
+
+	<body>
+		<%- include('../includes/nav.ejs' )   %>
+<main>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Shopping Cart</h1>
+				<% if (products.length > 0) { %>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Product</th>
+								<th>Price</th>
+								<th>Quantity</th>
+								<th>Total</th>
+								<th></th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<% products.forEach((p) => { %>
+								<tr>
+									<td><%= p.title %></td>
+
+									<td>$<%= p.price %></td>
+									<td><%= p.cartItems.quantity %></td>
+									<td>$<%= p.price *  p.cartItems.quantity %></td>
+									<td>
+										<form action="/cart-delete-item" method="POST">
+											<input type="hidden" name="productId" value="<%= p.id %>">
+											<button type="submit" class="btn btn-danger">Delete</button>
+										</form>
+									</td> 
+								</tr>
+							<% }) %>
+						</tbody>
+						
+					</table>
+					<form action="/create-order" method="POST">
+						<input type="hidden" name="productId" value="<%=  %>">
+						<button type="submit" class="btn btn-danger">Order Now!</button>
+					</form>
+				<% } else { %>
+					<div class="row">
+						<div class="col-md-12">
+							<h3>No products in your cart</h3>
+						</div>
+					</div>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</main>
+		<%- include('../includes/end.ejs' )   %>
